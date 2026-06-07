@@ -3,7 +3,7 @@ const THEME_KEY = 'todo_theme';
 
 function applyTheme(theme) {
   document.documentElement.dataset.theme = theme;
-  document.getElementById('theme-toggle').textContent = theme === 'dark' ? '☀️' : '🌙';
+  document.getElementById('theme-toggle').textContent = theme === 'dark' ? 'Light' : 'Dark';
 }
 
 function initTheme() {
