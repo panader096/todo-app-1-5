@@ -217,6 +217,23 @@ h1 {
   color: var(--delete-hover);
 }
 
+/* ── Stats footer ────────────────────────────── */
+.stats {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  min-height: 1.2rem;
+}
+
+.stats .stat-done {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* ── Empty state ──────────────────────────────── */
 .empty {
   font-size: 0.9rem;

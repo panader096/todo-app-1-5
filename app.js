@@ -26,6 +26,16 @@ function saveTasks(tasks) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
 }
 
+function renderStats(all) {
+  const stats = document.getElementById('stats');
+  if (all.length === 0) { stats.innerHTML = ''; return; }
+  const done = all.filter(t => t.done).length;
+  const left = all.length - done;
+  stats.innerHTML =
+    `<span>${left} task${left !== 1 ? 's' : ''} left</span>` +
+    `<span class="stat-done">${done} of ${all.length} done</span>`;
+}
+
 function renderTasks() {
   const query = document.getElementById('search-input').value.toLowerCase();
   const all = loadTasks();
@@ -47,6 +57,7 @@ function renderTasks() {
     ? 'No tasks yet — add one above.'
     : 'No tasks match your filter.';
   empty.classList.toggle('hidden', tasks.length > 0);
+  renderStats(all);
 
   tasks.forEach((task) => {
     const li = document.createElement('li');
