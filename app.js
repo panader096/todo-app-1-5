@@ -1,6 +1,8 @@
 const STORAGE_KEY = 'todo_tasks';
 const THEME_KEY = 'todo_theme';
 
+let activeFilter = 'all';
+
 function applyTheme(theme) {
   document.documentElement.dataset.theme = theme;
   document.getElementById('theme-toggle').textContent = theme === 'dark' ? 'Light' : 'Dark';
@@ -25,11 +27,25 @@ function saveTasks(tasks) {
 }
 
 function renderTasks() {
-  const tasks = loadTasks();
+  const query = document.getElementById('search-input').value.toLowerCase();
+  const all = loadTasks();
+
+  const tasks = all.filter(t => {
+    const matchesFilter =
+      activeFilter === 'all' ||
+      (activeFilter === 'active' && !t.done) ||
+      (activeFilter === 'completed' && t.done);
+    const matchesSearch = t.text.toLowerCase().includes(query);
+    return matchesFilter && matchesSearch;
+  });
+
   const list = document.getElementById('task-list');
   const empty = document.getElementById('empty-msg');
 
   list.innerHTML = '';
+  empty.textContent = all.length === 0
+    ? 'No tasks yet — add one above.'
+    : 'No tasks match your filter.';
   empty.classList.toggle('hidden', tasks.length > 0);
 
   tasks.forEach((task) => {
@@ -87,6 +103,17 @@ document.getElementById('add-form').addEventListener('submit', (e) => {
 });
 
 document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+document.querySelectorAll('.filter-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeFilter = btn.dataset.filter;
+    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderTasks();
+  });
+});
+
+document.getElementById('search-input').addEventListener('input', renderTasks);
 
 initTheme();
 renderTasks();

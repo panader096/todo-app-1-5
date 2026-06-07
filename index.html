@@ -24,6 +24,15 @@
       <button type="submit">Add</button>
     </form>
 
+    <div class="filter-bar">
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="active">Active</button>
+        <button class="filter-tab" data-filter="completed">Completed</button>
+      </div>
+      <input id="search-input" type="search" placeholder="Search tasks…" autocomplete="off">
+    </div>
+
     <ul id="task-list"></ul>
 
     <p id="empty-msg" class="empty">No tasks yet — add one above.</p>
