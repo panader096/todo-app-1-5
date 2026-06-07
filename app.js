@@ -1,4 +1,20 @@
 const STORAGE_KEY = 'todo_tasks';
+const THEME_KEY = 'todo_theme';
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  document.getElementById('theme-toggle').textContent = theme === 'dark' ? '☀️' : '🌙';
+}
+
+function initTheme() {
+  applyTheme(localStorage.getItem(THEME_KEY) || 'light');
+}
+
+function toggleTheme() {
+  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  localStorage.setItem(THEME_KEY, next);
+  applyTheme(next);
+}
 
 function loadTasks() {
   return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
@@ -70,4 +86,7 @@ document.getElementById('add-form').addEventListener('submit', (e) => {
   }
 });
 
+document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+initTheme();
 renderTasks();

@@ -18,6 +18,16 @@
   --radius: 10px;
 }
 
+[data-theme="dark"] {
+  --bg: #1a1a2e;
+  --surface: #24243e;
+  --border: #3a3a5c;
+  --text: #e2e2f0;
+  --text-muted: #7c7c9e;
+  --done-color: #5a5a7a;
+  --delete-color: #4a4a6a;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
@@ -34,10 +44,30 @@ body {
   gap: 1.5rem;
 }
 
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 h1 {
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+}
+
+#theme-toggle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+#theme-toggle:hover {
+  background: var(--border);
 }
 
 /* ── Add form ─────────────────────────────────── */
